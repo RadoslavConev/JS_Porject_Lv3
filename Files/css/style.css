@@ -1,0 +1,10 @@
+#input_form {
+	display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#txtinput {
+	width: 400px;
+	height: 30px;
+}
