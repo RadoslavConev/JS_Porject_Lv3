@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Caesar Cipher Decoder 0.1.3</title>
+	<title>Caesar Cipher Decoder 0.1.2</title>
 	<!-- <script src="caesar_logic.js" type="application/javascript"></script> -->
 	<link rel="stylesheet" href="css/style.css">
 </head>
@@ -31,11 +31,6 @@ var mostFrequent = null;
 var counts = { };
 var indexOfMostCommon;
 var displcE;
-var inE;
-var displcT;
-var inT;
-var displcH;
-var inH;
 var newText = [];
 
 function decodinger (e) {
@@ -51,8 +46,10 @@ function decodinger (e) {
 	// console.log(input_split)
 	var previous = 1;
 let letters = {};
-
-		//count letters
+// letters = {
+// 	a: 8,
+// 	b: 7
+// }
 for( let i = 0; i < input_split.length; i++){
 	// console.log( input_split[i])
 	var curLetter = input_split[i];
@@ -63,7 +60,8 @@ for( let i = 0; i < input_split.length; i++){
 	}
 }
 
-		//most common letter
+
+// console.log(letters)
 let max = 1;
 let letter = '';
 for (const [key, value] of Object.entries(letters)) {
@@ -72,76 +70,6 @@ for (const [key, value] of Object.entries(letters)) {
   	max = value; letter = key;
   }
 }
-console.log(letter)
-
-		//displ`s
-if ( ( 4 - alphabet.indexOf(letter) ) > 0 ){	
-	inE = 4 - alphabet.indexOf(letter);
-	//console.log(alphabet.indexOf(letter))
-	//console.log(inE)
-} else if ( ( 4 - alphabet.indexOf(letter) ) < 0 ){
-	inE = 25 + ( 4 - alphabet.indexOf(letter) );
-	//console.log( 4 - alphabet.indexOf(letter))
-	//console.log(inE)
-} else {
-	inE = 0;
-	//console.log(inE)
-}
-displcE = alphabet[inE];
-
-if ( ( 19 - alphabet.indexOf(letter) ) > 0 ){	
-	inT = 19 - alphabet.indexOf(letter);
-	//console.log(alphabet.indexOf(letter))
-	//console.log(inE)
-} else if ( ( 19 - alphabet.indexOf(letter) ) < 0 ){
-	inT = 25 + ( 19 - alphabet.indexOf(letter) );
-	//console.log( 4 - alphabet.indexOf(letter))
-	//console.log(inT)
-} else {
-	inT = 0;
-	//console.log(inT)
-}
-displcT = alphabet[inT];
-
-if ( ( 7 - alphabet.indexOf(letter) ) > 0 ){	
-	inH = 7 - alphabet.indexOf(letter);
-	//console.log(alphabet.indexOf(letter))
-	//console.log(inH)
-} else if ( ( 7 - alphabet.indexOf(letter) ) < 0 ){
-	inH = 25 + ( 7 - alphabet.indexOf(letter) );
-	//console.log( 7 - alphabet.indexOf(letter))
-	//console.log(inH)
-} else {
-	inH = 0;
-	//console.log(inH)
-}
-displcH = alphabet[inH];
-
-
-		//calc all variants
-let allVariants = {};
-for (var l = 25; l >= 0; l--) {
-	let currStr = '';
-	for (var b = 0; b < input_split.length; b++) {
-		let currSymbol = input_split[b];
-		if ( (alphabet.indexOf(currSymbol) + l) <= 25 ) {
-			//console.log((alphabet.indexOf(currSymbol) + l), 'first if')
-		currStr += alphabet[alphabet.indexOf(currSymbol) + l];
-		} else if ( (alphabet.indexOf(currSymbol) + l) > 25) {
-			//console.log('second if')
-			let newIndex = (alphabet.indexOf(currSymbol) + l) - 26;
-			currStr += alphabet[newIndex];
-		}
-	}
-	allVariants[l] = currStr;
-}
-for (const [key, value] of Object.entries(allVariants)) {
-  console.log(`${key}: ${value}`);
-}
-
-
-
-
 
 // console.log( letter)
 //e, t, h
@@ -149,10 +77,10 @@ for (const [key, value] of Object.entries(allVariants)) {
 // console.log( alphabet.indexOf('e'))
 // console.log( alphabet.indexOf('t'))
 // console.log( alphabet.indexOf('h'))
-// console.log( alphabet.indexOf(letter))
-// console.log( alphabet.indexOf(letter) - alphabet.indexOf('e') )
-// console.log( alphabet.indexOf(letter) - alphabet.indexOf('t') )
-// console.log( alphabet.indexOf(letter) - alphabet.indexOf('h') )
+console.log( alphabet.indexOf(letter))
+console.log( alphabet.indexOf(letter) - alphabet.indexOf('e') )
+console.log( alphabet.indexOf(letter) - alphabet.indexOf('t') )
+console.log( alphabet.indexOf(letter) - alphabet.indexOf('h') )
 // for(var o = 0; o < 26; o++){
 // 	for(var j = 0; j < input.length; j++){
 // 		console.log(j);
