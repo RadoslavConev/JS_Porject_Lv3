@@ -3,29 +3,28 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Caesar Cipher Decoder 0.1.3</title>
+	<title>Caesar Cipher Decoder 0.1.5</title>
 	<!-- <script src="caesar_logic.js" type="application/javascript"></script> -->
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
-	<div id='input_form'>
-		<form>
-			<div>
-				<input type="text" name="txtinput" id=txtinput></input>
+	<div id='input_form' class="">
+		<form class="row row-cols-lg-auto g-3 align-items-center">
+			<div class="position-absolute top-50 start-50">
+				<input type="text" name="txtinput" id=txtinput class="form-control"></input>
 			</div>
 			<div>
-				<button type="submit" id=txtinput_btn>Decode</button>
+				<button type="submit" id=txtinput_btn class="btn btn-warning text-center  btn-block" onclick="showResults()">Decode</button>
 			</div>
 		</form>
 	</div>
-	
-
-
 
 
 <script type="text/javascript">
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']; //26
 var input_split = [];
+var input_split_default = [];
 var input;
 var mostFrequent = null;
 var counts = { };
@@ -37,6 +36,7 @@ var inT;
 var displcH;
 var inH;
 var newText = [];
+var allVariants = {};
 
 function decodinger (e) {
 	document.getElementById("txtinput_btn").addEventListener("click", function(event){
@@ -44,13 +44,17 @@ function decodinger (e) {
 	});
 
 	input = document.getElementById('txtinput').value;
+	input_split_default = input.split('');
+	//console.log(input_split_default);
 	// console.log(input)
 	input = input.toLowerCase();
 	// console.log(input)
 	input_split = input.split('');
 	// console.log(input_split)
 	var previous = 1;
-let letters = {};
+	let letters = {};
+
+
 
 		//count letters
 for( let i = 0; i < input_split.length; i++){
@@ -63,6 +67,8 @@ for( let i = 0; i < input_split.length; i++){
 	}
 }
 
+
+
 		//most common letter
 let max = 1;
 let letter = '';
@@ -73,6 +79,9 @@ for (const [key, value] of Object.entries(letters)) {
   }
 }
 console.log(letter)
+
+
+
 
 		//displ`s
 if ( ( 4 - alphabet.indexOf(letter) ) > 0 ){	
@@ -118,22 +127,37 @@ if ( ( 7 - alphabet.indexOf(letter) ) > 0 ){
 displcH = alphabet[inH];
 
 
+
+
+
 		//calc all variants
-let allVariants = {};
-for (var l = 25; l >= 0; l--) {
+//var allVariants = {};
+for (var l = 0; l < 26; l++) {
 	let currStr = '';
 	for (var b = 0; b < input_split.length; b++) {
 		let currSymbol = input_split[b];
-		if ( (alphabet.indexOf(currSymbol) + l) <= 25 ) {
-			//console.log((alphabet.indexOf(currSymbol) + l), 'first if')
-		currStr += alphabet[alphabet.indexOf(currSymbol) + l];
-		} else if ( (alphabet.indexOf(currSymbol) + l) > 25) {
+		if ( currSymbol != ' ' ) {
+			if ( ( alphabet.indexOf(currSymbol) + l) <= 25 ) {
+				//console.log((alphabet.indexOf(currSymbol) + l), 'first if')
+				if ( input_split_default[b] == input_split_default[b].toUpperCase() ) {
+					currStr += alphabet[alphabet.indexOf(currSymbol) + l].toUpperCase();
+				} else {
+					currStr += alphabet[alphabet.indexOf(currSymbol) + l];
+				}
+			} else if ( (alphabet.indexOf(currSymbol) + l) > 25) {
 			//console.log('second if')
-			let newIndex = (alphabet.indexOf(currSymbol) + l) - 26;
-			currStr += alphabet[newIndex];
+				let newIndex = (alphabet.indexOf(currSymbol) + l) - 26;
+				if ( input_split_default[b] == input_split_default[b].toUpperCase() ) {
+					currStr += alphabet[newIndex].toUpperCase();
+				} else {
+					currStr += alphabet[newIndex];
+				}
+			}
+		} else {
+			currStr += ' ';
 		}
+		allVariants[l] = currStr;
 	}
-	allVariants[l] = currStr;
 }
 for (const [key, value] of Object.entries(allVariants)) {
   console.log(`${key}: ${value}`);
@@ -141,6 +165,20 @@ for (const [key, value] of Object.entries(allVariants)) {
 
 
 
+		//Results
+// function showResults() {
+// 	for (var r = 0; r < 25; r++) {
+// 		liElement = document.createElement('li');
+// 		liElement.setAttribute('value', allVariants[displcH]);
+// 	}
+// }
+
+for (var r = 0; r < 26; r++) {
+		liElement = document.createElement('li');
+		liElement.innerText = r + ': ' + allVariants[r];
+		liElement.setAttribute('class', "list-group-item");
+		document.getElementById("fullList").appendChild(liElement);
+	}
 
 
 // console.log( letter)
@@ -190,15 +228,36 @@ for (const [key, value] of Object.entries(allVariants)) {
 // 	document.getElementById('show').innerHTML = decodinger();
 // }
 
+function showResults() {
+	for (var r = 0; r < 25; r++) {
+		liElement = document.createElement('li');
+		liElement.setAttribute('innerText', allVariants[displcH]);
+		document.getElementById("mostLikely").appendChild(liElement);
+	}
+}
+
+
+
 
 
 
 </script>
+
+
 	
-<button type="submit" onclick="decodinger()" id=test_btn>Show</button>
-<div id=show >nothing</div>
-<div>Result:</div>
-<div id="result"></div>
+<button type="submit" onclick="decodinger()" id=test_btn class="btn btn-warning">Show</button>
+<!-- <div id=show ></div> -->
+<h3>Most likely results:</h3>
+<div id="result">
+	<ul id="mostLikely" class="list-group">
+		<!-- <li class="list-group-item"></li> -->
+	</ul>
+	<ul id="fullList" class="list-group">
+		<!-- <li class="list-group-item"></li> -->
+	</ul>
+</div>
+
+
 
 </body>
 </html>
