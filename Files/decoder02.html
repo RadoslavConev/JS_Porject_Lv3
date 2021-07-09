@@ -3,23 +3,24 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Caesar Cipher Decoder 0.1.5</title>
+	<title>Caesar Cipher Decoder 0.1.6</title>
 	<!-- <script src="caesar_logic.js" type="application/javascript"></script> -->
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
+	<h3>This is Caesar Cipher Decoder made by Radoslav Conev.</h3>
+	<h4>Instructions: Place your text in the text field belloew. Then click "Decode" Button. If everithing is okay the result taht is the most likely to be corect will appear. If its not you can view whole table of results which is organaised that way: "shift:result".</h4>
 	<div id='input_form' class="">
 		<form class="row row-cols-lg-auto g-3 align-items-center">
 			<div class="position-absolute top-50 start-50">
 				<input type="text" name="txtinput" id=txtinput class="form-control"></input>
 			</div>
 			<div>
-				<button type="submit" id=txtinput_btn class="btn btn-warning text-center  btn-block" onclick="showResults()">Decode</button>
+				<button type="submit" id=txtinput_btn class="btn btn-warning text-center  btn-block" onclick="decodinger()">Decode</button>
 			</div>
 		</form>
 	</div>
-
 
 <script type="text/javascript">
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']; //26
@@ -39,7 +40,7 @@ var newText = [];
 var allVariants = {};
 
 function decodinger (e) {
-	document.getElementById("txtinput_btn").addEventListener("click", function(event){
+	document.getElementById("input_form").addEventListener("click", function(event){
     	event.preventDefault() 
 	});
 
@@ -136,7 +137,7 @@ for (var l = 0; l < 26; l++) {
 	let currStr = '';
 	for (var b = 0; b < input_split.length; b++) {
 		let currSymbol = input_split[b];
-		if ( currSymbol != ' ' ) {
+		if ( alphabet.indexOf(currSymbol) > -1 ) {
 			if ( ( alphabet.indexOf(currSymbol) + l) <= 25 ) {
 				//console.log((alphabet.indexOf(currSymbol) + l), 'first if')
 				if ( input_split_default[b] == input_split_default[b].toUpperCase() ) {
@@ -154,7 +155,7 @@ for (var l = 0; l < 26; l++) {
 				}
 			}
 		} else {
-			currStr += ' ';
+			currStr += currSymbol;
 		}
 		allVariants[l] = currStr;
 	}
@@ -162,8 +163,6 @@ for (var l = 0; l < 26; l++) {
 for (const [key, value] of Object.entries(allVariants)) {
   console.log(`${key}: ${value}`);
 }
-
-
 
 		//Results
 // function showResults() {
@@ -228,16 +227,21 @@ for (var r = 0; r < 26; r++) {
 // 	document.getElementById('show').innerHTML = decodinger();
 // }
 
-function showResults() {
-	for (var r = 0; r < 25; r++) {
-		liElement = document.createElement('li');
-		liElement.setAttribute('innerText', allVariants[displcH]);
-		document.getElementById("mostLikely").appendChild(liElement);
-	}
-}
+// function showResults() {
+// 	for (var r = 0; r < 25; r++) {
+// 		liElement = document.createElement('li');
+// 		liElement.setAttribute('innerText', allVariants[displcH]);
+// 		document.getElementById("mostLikely").appendChild(liElement);
+// 	}
+// }
 
-
-
+// function showFullTable() {
+// 	document.getElementById("full_table_btn").addEventListener("click", function(event){
+//   event.preventDefault()
+// });
+// 	document.getElementById('fullTable').setAttribute('visible', '');
+// }
+// console.log(document.getElementById('fullList'))
 
 
 
@@ -245,18 +249,32 @@ function showResults() {
 
 
 	
-<button type="submit" onclick="decodinger()" id=test_btn class="btn btn-warning">Show</button>
+<button type="submit" onclick="showFullTable()" id='full_table_btn' class="btn btn-warning">Show</button>
 <!-- <div id=show ></div> -->
 <h3>Most likely results:</h3>
-<div id="result">
+<div id="mostLikelyTable">
 	<ul id="mostLikely" class="list-group">
 		<!-- <li class="list-group-item"></li> -->
 	</ul>
+</div>
+<div id="fullTable" style="display:none">
 	<ul id="fullList" class="list-group">
-		<!-- <li class="list-group-item"></li> -->
+		<!-- <li class="list-group-item">yt</li> -->
 	</ul>
 </div>
 
+
+
+<script type="text/javascript">
+function showFullTable() {
+	document.getElementById("full_table_btn").addEventListener("click", function(event){
+		event.preventDefault()
+});
+document.getElementById('fullTable').setAttribute('style', 'display:inline');
+}
+console.log(document.getElementById('fullList'))
+
+</script>
 
 
 </body>
