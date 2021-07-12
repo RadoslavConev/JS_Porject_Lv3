@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Caesar Cipher Decoder</title>
+	<script src="JS/caesar_logic.js" type="application/javascript"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+	<h2>Caesar Cipher Decoder developed by me 😉</h2>
+	<h4>Instructions: Place/write✏️ your text in the text field belloew. Then click "Decode" Button. The result that is most likely to be correct will appear. With the "Show Full Table" button you can see a table with all possible results.</h4>
+	<div id='input_form' class="">
+		<form class="row row-cols-lg-auto g-3 align-items-center">
+			<div class="position-absolute top-50 start-50">
+				<input type="text" name="txtinput" id=txtinput class="form-control"></input>
+			</div>
+			<div>
+				<button type="submit" id=txtinput_btn class="btn btn-warning text-center  btn-block" onclick="decode()">Decode 🔮</button>
+				<button onclick="location.reload()" class="btn btn-danger text-center  btn-block">Clear All 🧹</button>
+			</div>
+		</form>
+	</div>
+	<h3 id="mostLikelyTitle" style="display:none">Most likely results:</h3>
+	<div id="mostLikelyTable" style="display:none">
+		<ul id="mostLikely" class="list-group"></ul>
+	</div>
+	<button type="submit" onclick="showFullTable()" id='full_table_btn' class="btn btn-warning" style="display:none">Show Full Table 🧾</button>
+	<div id="fullTable" style="display:none">
+		<ul id="fullList" class="list-group"></ul>
+	</div>
+</body>
+</html>
