@@ -45,7 +45,7 @@ for (const [key, value] of Object.entries(letters)) {
 if ( ( 4 - alphabet.indexOf(letter) ) > 0 ){	
 	inE = 4 - alphabet.indexOf(letter);
 } else if ( ( 4 - alphabet.indexOf(letter) ) < 0 ){
-	inE = 25 + ( 4 - alphabet.indexOf(letter) );
+	inE = 26 + ( 4 - alphabet.indexOf(letter) );
 } else {
 	inE = 0;
 }
@@ -53,7 +53,7 @@ if ( ( 4 - alphabet.indexOf(letter) ) > 0 ){
 if ( ( 19 - alphabet.indexOf(letter) ) > 0 ){	
 	inT = 19 - alphabet.indexOf(letter);
 } else if ( ( 19 - alphabet.indexOf(letter) ) < 0 ){
-	inT = 25 + ( 19 - alphabet.indexOf(letter) );
+	inT = 26 + ( 19 - alphabet.indexOf(letter) );
 } else {
 	inT = 0;
 }
@@ -61,7 +61,7 @@ if ( ( 19 - alphabet.indexOf(letter) ) > 0 ){
 if ( ( 7 - alphabet.indexOf(letter) ) > 0 ){	
 	inH = 7 - alphabet.indexOf(letter);
 } else if ( ( 7 - alphabet.indexOf(letter) ) < 0 ){
-	inH = 25 + ( 7 - alphabet.indexOf(letter) );
+	inH = 26 + ( 7 - alphabet.indexOf(letter) );
 } else {
 	inH = 0;
 }
@@ -99,17 +99,17 @@ if ( allVariants[0] == undefined ) {
 } else {
 
 liElement = document.createElement('li');
-liElement.innerText = '"e": ' + allVariants[inE + 1];
+liElement.innerText = '"e": ' + allVariants[inE];
 liElement.setAttribute('class', "list-group-item");
 document.getElementById("mostLikely").appendChild(liElement);
 
 liElement = document.createElement('li');
-liElement.innerText = '"t": ' + allVariants[inT + 1];
+liElement.innerText = '"t": ' + allVariants[inT];
 liElement.setAttribute('class', "list-group-item");
 document.getElementById("mostLikely").appendChild(liElement);
 
 liElement = document.createElement('li');
-liElement.innerText = '"h": ' + allVariants[inH + 1];
+liElement.innerText = '"h": ' + allVariants[inH];
 liElement.setAttribute('class', "list-group-item");
 document.getElementById("mostLikely").appendChild(liElement);
 
